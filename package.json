@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "@bahmutov/cy-api": "^2.2.3",
+    "cypress": "^12.2.0",
+    "cypress-dotenv": "^2.0.0",
+    "dotenv": "^16.0.3",
+    "mochawesome-merge": "^4.3.0",
+    "mochawesome-report-generator": "^6.2.0"
+  },
+  "type": "module"
+}
