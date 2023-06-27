@@ -1,11 +1,11 @@
 class RequestManager {
-    buildRequestData(method, url, body, accessToken) {
+    buildRequestData(method, url, body = null) {
         let requestData = {
             method: method,
             url: url,
             failOnStatusCode: false,
             headers: {
-                Authorization: 'Bearer ' + accessToken,
+                Authorization: 'Bearer ' + cy.auth.accessToken,
                 Connection: 'keep-alive',
                 Accept: '*/*',
                 'Content-Type': 'application/json',
@@ -15,31 +15,28 @@ class RequestManager {
         cy.log(method)
         return requestData
     }
-    sendGetRequest = (url, accessToken) => 
-        cy.api(this.buildRequestData('GET', url, null, accessToken))
+    sendGetRequest = (url) =>
+        cy.api(this.buildRequestData('GET', url))
 
-    sendPostRequest = (url, body, accessToken) => 
-        cy.api(this.buildRequestData('POST', url, body, accessToken))
+    sendPostRequest = (url, body) =>
+        cy.api(this.buildRequestData('POST', url, body))
 
-    sendPatchRequest = (url, body, accessToken) => 
-        cy.api(this.buildRequestData('PATCH', url, body, accessToken))
+    sendPatchRequest = (url, body) =>
+        cy.api(this.buildRequestData('PATCH', url, body))
 
-    sendPutRequest = (url, body, accessToken) => 
-        cy.api(this.buildRequestData('PATCH', url, body, accessToken))
+    sendPutRequest = (url, body) =>
+        cy.api(this.buildRequestData('PATCH', url, body))
 
-    sendDeleteRequest = (url, accessToken) => 
-        cy.api(this.buildRequestData('DELETE', url, null, accessToken))
+    sendDeleteRequest = (url) =>
+        cy.api(this.buildRequestData('DELETE', url))
         
-    sendGraphQLRequest = (body, variables, accessToken) => 
+    sendGraphQLRequest = (body, variables) =>
     cy.api(this.buildRequestData('POST', '/api/gql', 
         {
             "query": body,
+            // "operationName": "...",
             "variables": variables
-        }, 
-        accessToken))
-    
-    sendIdentityRequest = (accessToken) => 
-        cy.api(this.buildRequestData('GET', '/api/identity', null, accessToken))
+        }))
 }
 
 module.exports = new RequestManager()
