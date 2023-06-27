@@ -41,7 +41,7 @@ class ResponseAssertion {
                 } else {
                     switch (fieldAssertion) {
                         case 'exists':
-                            expect(responseBody).to.have.property(key) // Check is field exist
+                            expect(responseBody).to.have.property(key) // Check whether the field exists
                             break;
                         case 'string':
                             expect(responseBody[key]).to.be.a('string') // Check whether the field is string
