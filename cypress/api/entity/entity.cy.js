@@ -1,7 +1,7 @@
 const AuthHelper = require("../../modules/authHelper");
 const PermissionsParser = require("../../modules/PermissionsParser");
 const RequestManager = require("../../modules/RequestManager");
-const ResponseAssertion = require("../../modules/responseAssertion")
+const ResponseAssertion = require("../../modules/ResponseAssertion")
 const { entityBody } = require("./entity.js");
 
 before(() => {
@@ -17,9 +17,10 @@ describe('entity', () => {
     RequestManager.sendPostRequest('/api/entity/', entityBody).should((response) => {
       let permission = PermissionsParser.assertScope(cy.identity, 'entity', 'create')
       if (permission === null) {
-        ResponseAssertion.errorForbidden(response)
+        ResponseAssertion.errorStatusForbidden(response)
       } else {
-        ResponseAssertion.successOk(response)
+        ResponseAssertion.successStatusOk(response)
+        ResponseAssertion.successBodyCreated(response)
       }
     })
   })
