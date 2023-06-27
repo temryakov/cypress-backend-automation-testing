@@ -1,12 +1,12 @@
 class PermissionsParser {
-    getArray(identityResponse, permissionType) {
-        const arr = identityResponse.body.data.permissions
+    getArray(identity, permissionType) {
+        const arr = identity.permissions
         const permission = arr.find(item => item.rsname === permissionType);
 
         return permission.scopes // ['read', 'add', etc]
     }
-    assertScope(identityResponse, permissionType, scopeToCheck) {
-        let scopesArray = this.getArray(identityResponse, permissionType)
+    assertScope(identity, permissionType, scopeToCheck) {
+        let scopesArray = this.getArray(identity, permissionType)
         for (const scope of scopesArray) {
             if (scope === scopeToCheck) {
                 return scope;
