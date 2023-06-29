@@ -14,15 +14,17 @@ before(() => {
 
 describe('entity', () => {
   it('Entity test case #1', () => {    
-    RequestManager.sendPostRequest('/api/entity/', entityBody).should((response) => {
-      let permission = PermissionsParser.assertScope(cy.identity, 'entity', 'create')
-      if (permission === null) {
-        ResponseAssertion.errorStatusForbidden(response)
-      } else {
+    let permission = PermissionsParser.assertScope(cy.identity, 'entity', 'create')
+    if (permission === null) {
+      RequestManager.sendPostRequest('/api/entity/', entityBody).should((response) => {
+      ResponseAssertion.errorStatusForbidden(response)
+    })
+    } else {
+      RequestManager.sendPostRequest('/api/entity/', entityBody).should((response) => {
         ResponseAssertion.successStatusOk(response)
         ResponseAssertion.successBodyCreated(response)
-      }
-    })
+      })
+    }
   })
 })
 
