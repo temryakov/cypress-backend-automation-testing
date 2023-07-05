@@ -1,3 +1,5 @@
 # GA Cypress API automation tests
 
-Cypress Back-end automation testing project targeted to test REST API and GraphQL requests
+This project is aimed at creating automated tests for REST API and GraphQL requests using the Cypress framework.
+
+If you have any suggestions or find any areas where improvements can be made in terms of architecture or code, please feel free to leave your comments. Thank you!
